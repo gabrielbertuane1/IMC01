@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de gastos</title>
+    <style>
+        h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.041);
+            font-size: 2.4em;
+        }
+        .container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 30px;
+        }
+        .input-group {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin-bottom: 20px;
+        }
+        label {
+          width: 120px;
+          text-align: right;
+          padding-right: 20px;
+        }
+        input[type="text"] {
+          width: 200px;
+          height: 30px;
+          padding: 5px;
+          font-size: 16px;
+        }
+        button {
+          width: 120px;
+          height: 40px;
+          background-color: rgb(0, 0, 0);
+          color: rgb(255, 255, 255);
+          font-size: 16px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            background-color: rgb(165, 161, 161);
+            color: rgb(0, 0, 0);
+        }
+        .result {
+          margin-top: 20px;
+          font-size: 18px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Cálculo de IMC</h1>
+        <div class="input-group">
+          <label for="weight">Peso (kg):</label>
+          <input type="text" id="weight" name="weight">
+        </div>
+        <div class="input-group">
+          <label for="height">Altura (m):</label>
+          <input type="text" id="height" name="height">
+        </div>
+        <button id="calculate">Calcular</button>
+        <p class="result"></p>
+      </div>
+      <script>
+        const weightInput = document.querySelector("#weight");
+        const heightInput = document.querySelector("#height");
+        const calculateBtn = document.querySelector("#calculate");
+        const resultEl = document.querySelector(".result");
+  
+        function calcIMC(weight, height) {
+          return weight / (height * height);
+        }
+  
+        calculateBtn.addEventListener("click", function() {
+          const weight = weightInput.value;
+          const height = heightInput.value;
+  
+          const imc = calcIMC(weight, height).toFixed(2);
+          resultEl.innerHTML = `Seu IMC é: ${imc}`;
+  
+          if (imc < 18.5) {
+            resultEl.innerHTML += "<br>Abaixo do peso";
+          } else if (imc >= 18.5 && imc <= 24.9) {
+            resultEl.innerHTML += "<br>Peso normal";
+          } else if (imc >= 25 && imc <= 29.9) {
+            resultEl.innerHTML += "<br>Sobrepeso";
+          } else if (imc >= 30 && imc <= 34.9) {
+            resultEl.innerHTML += "<br>Obesidade grau I";
+          } else if (imc >= 35 && imc <= 39.9) {
+            resultEl.innerHTML += "<br>Obesidade grau II (severa)";
+          } else if (imc >= 40) {
+            resultEl.innerHTML += "<br>Obesidade grau III (mórbida)";
+          }
+        });
+      </script>
+      </script>
+    </body>
+  </html>
+  
+  
+  
+  
